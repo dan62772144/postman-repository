@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "1004640c-8d89-4e94-846e-4f57c8dd36fe",
+		"name": "PWC TASK 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24513551"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test for creating a user\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body contains user ID\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"});\r",
+							"// RECOMMENDED IMPROVEMENTS\r",
+							"//Dynamic Data Handling: Make your tests more robust by handling dynamic data. For instance, in the \"Create\" test, you can extract the created user's ID and use it in subsequent requests."
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{Base Url}}/api/users",
+					"host": [
+						"{{Base Url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List a single User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test for listing a single user\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"listing a single user data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('data');\r",
+							"});\r",
+							"//RECOMMENDED IMPROVEMENT\r",
+							"//Consistent Data: Ensure that the data used for testing is consistent. For example, if you create a user in one test, use its ID to perform the \"List Single User\" test."
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base Url}}/api/users/2",
+					"host": [
+						"{{Base Url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "picking any module",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test for listing users\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"the Response body contains user list\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('data').that.is.an('array');\r",
+							"    pm.expect(jsonData.data.length).to.be.greaterThan(0);\r",
+							"});\r",
+							"//RECOMMENDED IMPROVEMENTS\r",
+							"//Negative Testing: Include negative test cases, like trying to create a user with invalid data or requesting a user that doesn't exist\r",
+							"//Documentation: Document your tests well, including the purpose of each test, the expected outcome, and any specific conditions or assumptions.\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Base Url}}/api/users",
+					"host": [
+						"{{Base Url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "Base Url",
+			"value": "https://reqres.in"
+		}
+	]
+}
